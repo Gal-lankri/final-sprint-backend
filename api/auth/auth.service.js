@@ -4,10 +4,19 @@ const userService = require('../user/user.service')
 const logger = require('../../services/logger.service')
 const cryptr = new Cryptr(process.env.SECRET1 || 'Secret-Puk-1234')
 
-async function login(email, password) {
+async function login(email, password , isGoogleUser , imgUrl , fullname) {
     logger.debug(`auth.service - login with email: ${email}`)
 
-    const user = await userService.getByUsername(email)
+    let user = await userService.getByUsername(email)
+    if(isGoogleUser && !user) {
+        user = {
+            email,
+            imgUrl,
+            password,
+            fullname
+        }
+        user = await userService.add(user)
+    }
     if (!user) return Promise.reject('Invalid email or password')
     // TODO: un-comment for real login
     // const match = await bcrypt.compare(password, user.password)
