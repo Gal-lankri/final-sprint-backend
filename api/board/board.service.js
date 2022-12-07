@@ -3,7 +3,7 @@ const logger = require('../../services/logger.service')
 const utilService = require('../../services/util.service')
 const ObjectId = require('mongodb').ObjectId
 
-async function query(filterBy = {txt:''}) {
+async function query(filterBy = { txt: '' }) {
     try {
         const criteria = {}
         const collection = await dbService.getCollection('board')
@@ -51,10 +51,12 @@ async function add(board) {
 
 async function update(board) {
     try {
+        // let temp = board._id
         var id = ObjectId(board._id)
         delete board._id
         const collection = await dbService.getCollection('board')
-        await collection.updateOne({ _id: ObjectId(id) }, { $set: board })
+        await collection.updateOne({ _id: id }, { $set: board })
+        board._id = id
         return board
     } catch (err) {
         logger.error(`cannot update board ${id}`, err)
@@ -77,7 +79,7 @@ async function addBoardMsg(boardId, msg) {
 async function removeBoardMsg(boardId, msgId) {
     try {
         const collection = await dbService.getCollection('board')
-        await collection.updateOne({ _id: ObjectId(boardId) }, { $pull: { msgs: {id: msgId} } })
+        await collection.updateOne({ _id: ObjectId(boardId) }, { $pull: { msgs: { id: msgId } } })
         return msgId
     } catch (err) {
         logger.error(`cannot add board msg ${boardId}`, err)
