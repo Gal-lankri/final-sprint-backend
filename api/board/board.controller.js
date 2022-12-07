@@ -9,7 +9,7 @@ async function getBoards(req, res) {
       txt: req.query.txt || ''
     }
     const boards = await boardService.query(filterBy)
-    console.log(boards);
+    // console.log(boards);
     res.json(boards)
   } catch (err) {
     logger.error('Failed to get boards', err)
@@ -20,7 +20,7 @@ async function getBoards(req, res) {
 async function getBoardById(req, res) {
   try {
     const boardId = req.params.id
-    console.log(boardId)
+    // console.log(boardId)
     const board = await boardService.getById(boardId)
     res.json(board)
   } catch (err) {
