@@ -2,9 +2,10 @@ const authService = require('./auth.service')
 const logger = require('../../services/logger.service')
 
 async function login(req, res) {
-    const { email, password } = req.body
+    const { email, password, isGoogleUser, imgUrl , fullname } = req.body
+    console.log(email, password, isGoogleUser, '00000000000000000000000');
     try {
-        const user = await authService.login(email, password)
+        const user = await authService.login(email, password, isGoogleUser, imgUrl , fullname)
         const loginToken = authService.getLoginToken(user)
         logger.info('User login: ', user)
         res.cookie('loginToken', loginToken, { sameSite: 'None', secure: true })
