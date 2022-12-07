@@ -50,12 +50,12 @@ async function updateBoard(req, res) {
     const board = req.body
     const activity = board.activities[board.activities.length - 1]
 
-    console.log(activity , '000000000000000000000000');
+    console.log(activity, '000000000000000000000000');
     // console.log('board', board)
     const updatedBoard = await boardService.update(board)
     // console.log(updatedBoard);
     res.json(updatedBoard)
-//type is the event to activate
+    //type is the event to activate
 
     // socketService.emitToBoard({type: 'board pushed', data: board, boardId: board._id})
 
