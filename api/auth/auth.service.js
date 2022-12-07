@@ -22,7 +22,6 @@ async function login(email, password) {
 //     await signup('bubu', '123', 'Bubu Bi')
 //     await signup('mumu', '123', 'Mumu Maha')
 // })()
-    
 
 async function signup({email, password, fullname, imgUrl}) {
     const saltRounds = 10
@@ -39,8 +38,8 @@ async function signup({email, password, fullname, imgUrl}) {
 
 
 function getLoginToken(user) {
-    const userInfo = {_id : user._id, fullname: user.fullname, isAdmin: user.isAdmin}
-    return cryptr.encrypt(JSON.stringify(userInfo))    
+    const userInfo = { _id: user._id, fullname: user.fullname, isAdmin: user.isAdmin }
+    return cryptr.encrypt(JSON.stringify(userInfo))
 }
 
 function validateToken(loginToken) {
@@ -49,7 +48,7 @@ function validateToken(loginToken) {
         const loggedinUser = JSON.parse(json)
         return loggedinUser
 
-    } catch(err) {
+    } catch (err) {
         console.log('Invalid login token')
     }
     return null
