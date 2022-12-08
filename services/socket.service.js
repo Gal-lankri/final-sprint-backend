@@ -23,7 +23,7 @@ function setupSocketAPI(http) {
             socket.boardId = boardId
         })
         socket.on('board updated', board => {
-            console.log('HI THIS BOARD UPDATED!!!!!!!!');
+            // console.log('HI THIS BOARD UPDATED!!!!!!!!');
             socket.broadcast.to(socket.boardId).emit('board pushed', board)
         })
         socket.on('new board enter', boardId => {
