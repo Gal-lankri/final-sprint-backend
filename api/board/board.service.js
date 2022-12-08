@@ -50,6 +50,7 @@ async function add(board) {
 }
 
 async function update(board) {
+    console.log('THIS IS UPDATE BOARD')
     try {
         // let temp = board._id
         var id = ObjectId(board._id)
