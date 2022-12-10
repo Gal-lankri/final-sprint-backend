@@ -23,13 +23,9 @@ function setupSocketAPI(http) {
             socket.boardId = boardId
         })
         socket.on('board updated', board => {
-            // console.log('HI THIS BOARD UPDATED!!!!!!!!');
+            // console.log(board.title);
             socket.broadcast.to(socket.boardId).emit('board pushed', board)
-            // board.members.forEach(member => {
-            //     // socket.to(socket[member._id]).emit('user notifications pushed')
-            //     gIo.to(socket[member._id]).emit('user notifications pushed')
-            // })
-            // socket.to
+            socket.broadcast.emit('activity pushed', board)
         })
         socket.on('new board enter', boardId => {
             console.log('boardId', boardId)
