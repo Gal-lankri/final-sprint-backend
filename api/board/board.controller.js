@@ -48,6 +48,7 @@ async function addBoard(req, res) {
 async function updateBoard(req, res) {
   try {
     const board = req.body
+    console.log(board._id)
     // const activity = board.activities[board.activities.length - 1]
 
     // console.log(activity, '000000000000000000000000');
