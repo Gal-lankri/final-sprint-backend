@@ -23,8 +23,9 @@ function setupSocketAPI(http) {
             socket.boardId = boardId
         })
         socket.on('board updated', board => {
-            // console.log('HI THIS BOARD UPDATED!!!!!!!!');
+            // console.log(board.title);
             socket.broadcast.to(socket.boardId).emit('board pushed', board)
+            socket.broadcast.emit('activity pushed', board)
         })
         socket.on('new board enter', boardId => {
             console.log('boardId', boardId)
@@ -34,6 +35,12 @@ function setupSocketAPI(http) {
             }
             socket.join(boardId)
             socket.boardId = boardId
+        })
+        socket.on('new user enter', userId => {
+            console.log('boardId', userId)
+            if (socket[userId]) return
+            socket.join(userId)
+            socket[userId] = userId
         })
         socket.on('chat-set-topic', topic => {
             if (socket.myTopic === topic) return
