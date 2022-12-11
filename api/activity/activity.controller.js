@@ -1,7 +1,7 @@
 const logger = require('../../services/logger.service')
 const userService = require('../user/user.service')
 const authService = require('../auth/auth.service')
-const socketService = require('../../services/socket.service')
+// const socketService = require('../../services/socket.service')
 const activitieservice = require('./activity.service')
 
 async function getactivities(req, res) {
@@ -56,11 +56,11 @@ async function addActivity(req, res) {
         delete activity.aboutUserId
         delete activity.byUserId
 
-        socketService.broadcast({type: 'activity-added', data: activity, userId: loggedinUser._id})
-        socketService.emitToUser({type: 'activity-about-you', data: activity, userId: activity.aboutUser._id})
+        // socketService.broadcast({type: 'activity-added', data: activity, userId: loggedinUser._id})
+        // socketService.emitToUser({type: 'activity-about-you', data: activity, userId: activity.aboutUser._id})
         
         const fullUser = await userService.getById(loggedinUser._id)
-        socketService.emitTo({type: 'user-updated', data: fullUser, label: fullUser._id})
+        // socketService.emitTo({type: 'user-updated', data: fullUser, label: fullUser._id})
 
         res.send(activity)
 
