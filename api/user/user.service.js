@@ -40,11 +40,11 @@ async function getById(userId) {
         const user = await collection.findOne({ _id: ObjectId(userId) })
         delete user.password
 
-        user.givenReviews = await reviewService.query({ byUserId: ObjectId(user._id) })
-        user.givenReviews = user.givenReviews.map(review => {
-            delete review.byUser
-            return review
-        })
+        // user.givenReviews = await reviewService.query({ byUserId: ObjectId(user._id) })
+        // user.givenReviews = user.givenReviews.map(review => {
+        //     delete review.byUser
+        //     return review
+        // })
 
         return user
     } catch (err) {
