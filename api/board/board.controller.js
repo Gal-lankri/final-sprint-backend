@@ -1,5 +1,5 @@
 const boardService = require('./board.service')
-
+const socketService = require('../../services/socket.service')
 const logger = require('../../services/logger.service')
 
 async function getBoards(req, res) {
@@ -57,6 +57,7 @@ async function updateBoard(req, res) {
     res.json(updatedBoard)
     //type is the event to activate
 
+    socketService.emitToBoard({ type: 'board pushed', data: board, boardId: board._id })
 
   } catch (err) {
     logger.error('Failed to update board', err)
