@@ -56,9 +56,6 @@ async function updateBoard(req, res) {
     // console.log(updatedBoard);
     res.json(updatedBoard)
     //type is the event to activate
-
-    socketService.emitToBoard({ type: 'board pushed', data: board, boardId: board._id })
-
   } catch (err) {
     logger.error('Failed to update board', err)
     res.status(500).send({ err: 'Failed to update board' })
